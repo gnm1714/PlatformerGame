@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwf3glsefcvvd"]
+[gd_scene load_steps=8 format=3 uid="uid://bxnci4atlca7e"]
 
-[ext_resource type="PackedScene" uid="uid://pwhb7t6awj8h" path="res://scenes/dirt.tscn" id="1_8t84p"]
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_ne1rq"]
-[ext_resource type="PackedScene" uid="uid://cvd6x3jjjjdot" path="res://scenes/player.tscn" id="2_pj3js"]
-[ext_resource type="Script" path="res://scenes/Area2D.gd" id="3_as2f0"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_2tbak"]
+[ext_resource type="PackedScene" uid="uid://5qih5hc31iwx" path="res://scenes/platform.tscn" id="2_b372u"]
+[ext_resource type="PackedScene" uid="uid://c1p8mnb8kxh6t" path="res://scenes/player.tscn" id="3_wluqa"]
+[ext_resource type="Script" path="res://scenes/Area2D.gd" id="4_kxamu"]
+[ext_resource type="PackedScene" uid="uid://bfk7qxm3uwu5d" path="res://scenes/wall.tscn" id="5_rihak"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_884sy"]
 size = Vector2(13, 519.531)
@@ -12,7 +13,7 @@ size = Vector2(13, 519.531)
 size = Vector2(944, 12.25)
 
 [node name="main" type="Node"]
-script = ExtResource("1_ne1rq")
+script = ExtResource("1_2tbak")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -104.0
@@ -21,64 +22,16 @@ offset_right = 840.0
 offset_bottom = 224.0
 color = Color(0.0627451, 0.811765, 1, 1)
 
-[node name="Dirt" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(-90, 162)
+[node name="platform" parent="." instance=ExtResource("2_b372u")]
+position = Vector2(-90, 163)
 
-[node name="Dirt2" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(-60, 162)
+[node name="platform2" parent="." instance=ExtResource("2_b372u")]
+position = Vector2(0, 163)
 
-[node name="Dirt3" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(-30, 162)
+[node name="platform3" parent="." instance=ExtResource("2_b372u")]
+position = Vector2(238, 163)
 
-[node name="Dirt4" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(0, 162)
-
-[node name="Dirt5" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(30, 162)
-
-[node name="Dirt6" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(60, 162)
-
-[node name="Dirt7" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(90, 162)
-
-[node name="Dirt8" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(184, 162)
-
-[node name="Dirt9" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(214, 162)
-
-[node name="Dirt10" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(244, 162)
-
-[node name="Dirt11" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(320, 128)
-
-[node name="Dirt12" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(350, 128)
-
-[node name="Dirt13" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(380, 128)
-
-[node name="Dirt14" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(410, 128)
-
-[node name="Dirt15" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(440, 128)
-
-[node name="Dirt16" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(470, 128)
-
-[node name="Dirt17" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(536, 87)
-
-[node name="Dirt18" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(566, 87)
-
-[node name="Dirt19" parent="." instance=ExtResource("1_8t84p")]
-position = Vector2(596, 87)
-
-[node name="player" parent="." instance=ExtResource("2_pj3js")]
+[node name="player" parent="." instance=ExtResource("3_wluqa")]
 position = Vector2(-82, 114)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -91,6 +44,7 @@ position = Vector2(-82, 114)
 
 [node name="SideWall" type="StaticBody2D" parent="."]
 position = Vector2(-97, -113.469)
+collision_layer = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SideWall"]
 position = Vector2(0.5, 63.2344)
@@ -102,7 +56,7 @@ shape = SubResource("RectangleShape2D_884sy")
 
 [node name="BottomWall" type="Area2D" parent="."]
 position = Vector2(480, -112)
-script = ExtResource("3_as2f0")
+script = ExtResource("4_kxamu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 position = Vector2(-112, 328)
@@ -111,6 +65,9 @@ shape = SubResource("RectangleShape2D_0eakp")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BottomWall"]
 position = Vector2(-110, -203)
 shape = SubResource("RectangleShape2D_0eakp")
+
+[node name="wall" parent="." instance=ExtResource("5_rihak")]
+position = Vector2(156, 60)
 
 [connection signal="fell" from="player" to="." method="new_game"]
 [connection signal="body_entered" from="BottomWall" to="player" method="_on_area_2d_body_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvd6x3jjjjdot"]
+[gd_scene load_steps=9 format=3 uid="uid://c1p8mnb8kxh6t"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_1s7nt"]
 [ext_resource type="Texture2D" uid="uid://cuhbq73vlqdgs" path="res://assets/characters/player.png" id="1_2e7i0"]
 [ext_resource type="Texture2D" uid="uid://bq5l5ytcr3ro7" path="res://assets/characters/walk.png" id="2_mlf8h"]
+[ext_resource type="PackedScene" uid="uid://cnswt0yak1cnp" path="res://scenes/dash.tscn" id="4_o4rp5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mv713"]
 animations = [{
@@ -30,6 +31,7 @@ _data = {
 }
 
 [node name="player" type="CharacterBody2D"]
+collision_mask = 6
 script = ExtResource("1_1s7nt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -46,3 +48,5 @@ shape = SubResource("RectangleShape2D_6pjf4")
 libraries = {
 "": SubResource("AnimationLibrary_nc5ij")
 }
+
+[node name="dash" parent="." instance=ExtResource("4_o4rp5")]
