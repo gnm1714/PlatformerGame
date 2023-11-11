@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1p8mnb8kxh6t"]
+[gd_scene load_steps=11 format=3 uid="uid://c1p8mnb8kxh6t"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_1s7nt"]
 [ext_resource type="Texture2D" uid="uid://cuhbq73vlqdgs" path="res://assets/characters/player.png" id="1_2e7i0"]
 [ext_resource type="Texture2D" uid="uid://bq5l5ytcr3ro7" path="res://assets/characters/walk.png" id="2_mlf8h"]
 [ext_resource type="PackedScene" uid="uid://cnswt0yak1cnp" path="res://scenes/dash.tscn" id="4_o4rp5"]
+[ext_resource type="PackedScene" uid="uid://c0prkub4r5n2u" path="res://scenes/monowire.tscn" id="5_nooqq"]
+[ext_resource type="Script" path="res://scenes/WirePivot.gd" id="5_oc4cq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mv713"]
 animations = [{
@@ -31,7 +33,7 @@ _data = {
 }
 
 [node name="player" type="CharacterBody2D"]
-collision_mask = 14
+collision_mask = 6
 script = ExtResource("1_1s7nt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -51,6 +53,12 @@ libraries = {
 
 [node name="dash" parent="." instance=ExtResource("4_o4rp5")]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(150, 0)
-collision_mask = 9
+[node name="WirePivot" type="Node2D" parent="."]
+position = Vector2(13, 24)
+rotation = -1.5708
+scale = Vector2(2, 2)
+script = ExtResource("5_oc4cq")
+
+[node name="monowire" parent="WirePivot" instance=ExtResource("5_nooqq")]
+position = Vector2(0, 0)
+scale = Vector2(1, 1)

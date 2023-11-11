@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://5qih5hc31iwx"]
+
+[ext_resource type="PackedScene" uid="uid://dku4wauy4mojp" path="res://scenes/dirt.tscn" id="1_o26dl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edwon"]
+size = Vector2(90, 30)
+
+[node name="platform" type="Area2D"]
+collision_layer = 2
+
+[node name="Dirt" parent="." instance=ExtResource("1_o26dl")]
+
+[node name="Dirt2" parent="." instance=ExtResource("1_o26dl")]
+position = Vector2(30, 0)
+
+[node name="Dirt3" parent="." instance=ExtResource("1_o26dl")]
+position = Vector2(60, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(45, 15)
+shape = SubResource("RectangleShape2D_edwon")

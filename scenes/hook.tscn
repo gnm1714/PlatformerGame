@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwba3bc8j50hl"]
+
+[ext_resource type="Texture2D" uid="uid://cqfrtqa4gvn03" path="res://assets/objects/monowire.png" id="1_6a1dg"]
+
+[node name="hook" type="DampedSpringJoint2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_6a1dg")
+offset = Vector2(0, 2.5)
+region_enabled = true
+region_rect = Rect2(0, 0, 4, 5)

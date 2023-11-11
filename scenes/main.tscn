@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxnci4atlca7e"]
+[gd_scene load_steps=9 format=3 uid="uid://bxnci4atlca7e"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_2tbak"]
 [ext_resource type="PackedScene" uid="uid://5qih5hc31iwx" path="res://scenes/platform.tscn" id="2_b372u"]
 [ext_resource type="PackedScene" uid="uid://c1p8mnb8kxh6t" path="res://scenes/player.tscn" id="3_wluqa"]
-[ext_resource type="Script" path="res://scenes/Area2D.gd" id="4_kxamu"]
+[ext_resource type="PackedScene" uid="uid://bwba3bc8j50hl" path="res://scenes/hook.tscn" id="4_ruq5x"]
 [ext_resource type="PackedScene" uid="uid://bfk7qxm3uwu5d" path="res://scenes/wall.tscn" id="5_rihak"]
+[ext_resource type="PackedScene" uid="uid://dl6bn21e2o0bn" path="res://scenes/hookpoint.tscn" id="6_va1kd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_884sy"]
 size = Vector2(13, 519.531)
@@ -12,38 +13,45 @@ size = Vector2(13, 519.531)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eakp"]
 size = Vector2(944, 12.25)
 
-[node name="main" type="Node"]
+[node name="main" type="Node2D"]
 script = ExtResource("1_2tbak")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -104.0
-offset_top = -320.0
-offset_right = 840.0
-offset_bottom = 224.0
+offset_right = 944.0
+offset_bottom = 544.0
 color = Color(0.0627451, 0.811765, 1, 1)
 
 [node name="platform" parent="." instance=ExtResource("2_b372u")]
-position = Vector2(-90, 163)
+position = Vector2(14, 483)
 
 [node name="platform2" parent="." instance=ExtResource("2_b372u")]
-position = Vector2(0, 163)
+position = Vector2(104, 483)
 
 [node name="platform3" parent="." instance=ExtResource("2_b372u")]
-position = Vector2(238, 163)
+position = Vector2(342, 483)
+
+[node name="platform4" parent="." instance=ExtResource("2_b372u")]
+position = Vector2(659, 483)
 
 [node name="player" parent="." instance=ExtResource("3_wluqa")]
-position = Vector2(-82, 114)
+position = Vector2(22, 434)
+
+[node name="hook" parent="." instance=ExtResource("4_ruq5x")]
+position = Vector2(29, 458)
+rotation = -1.5699
+node_a = NodePath("../player")
+length = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(370, -51)
+position = Vector2(474, 269)
 scale = Vector2(0.75, 0.871)
 zoom = Vector2(1.25, 1.25)
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(-82, 114)
+position = Vector2(22, 434)
 
 [node name="SideWall" type="StaticBody2D" parent="."]
-position = Vector2(-97, -113.469)
+position = Vector2(7, 206.531)
 collision_layer = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SideWall"]
@@ -55,8 +63,7 @@ position = Vector2(930, 63.4688)
 shape = SubResource("RectangleShape2D_884sy")
 
 [node name="BottomWall" type="Area2D" parent="."]
-position = Vector2(480, -112)
-script = ExtResource("4_kxamu")
+position = Vector2(584, 208)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 position = Vector2(-112, 328)
@@ -67,7 +74,10 @@ position = Vector2(-110, -203)
 shape = SubResource("RectangleShape2D_0eakp")
 
 [node name="wall" parent="." instance=ExtResource("5_rihak")]
-position = Vector2(156, 60)
+position = Vector2(260, 380)
+
+[node name="hookpoint" parent="." instance=ExtResource("6_va1kd")]
+position = Vector2(530, 373)
 
 [connection signal="fell" from="player" to="." method="new_game"]
-[connection signal="body_entered" from="BottomWall" to="player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="BottomWall" to="player" method="_on_bottom_wall_body_entered"]
