@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_1s7nt"]
 [ext_resource type="Texture2D" uid="uid://cuhbq73vlqdgs" path="res://assets/characters/player.png" id="1_2e7i0"]
 [ext_resource type="Texture2D" uid="uid://bq5l5ytcr3ro7" path="res://assets/characters/walk.png" id="2_mlf8h"]
-[ext_resource type="PackedScene" uid="uid://cnswt0yak1cnp" path="res://scenes/dash.tscn" id="4_o4rp5"]
+[ext_resource type="PackedScene" path="res://scenes/dash.tscn" id="4_o4rp5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mv713"]
 animations = [{
@@ -31,6 +31,7 @@ _data = {
 }
 
 [node name="player" type="CharacterBody2D"]
+z_index = 1
 collision_mask = 14
 script = ExtResource("1_1s7nt")
 
@@ -54,3 +55,7 @@ libraries = {
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(150, 0)
 collision_mask = 9
+
+[node name="SpeedTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
