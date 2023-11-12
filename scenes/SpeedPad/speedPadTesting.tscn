@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=3 uid="uid://bti0kd57816i3"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_s2a1k"]
+[ext_resource type="PackedScene" path="res://scenes/platform.tscn" id="2_74yji"]
+[ext_resource type="PackedScene" uid="uid://c1p8mnb8kxh6t" path="res://scenes/player.tscn" id="3_qckut"]
+[ext_resource type="PackedScene" path="res://scenes/hook.tscn" id="4_upqx7"]
+[ext_resource type="PackedScene" path="res://scenes/wall.tscn" id="5_765vh"]
+[ext_resource type="PackedScene" path="res://scenes/hookpoint.tscn" id="6_or4ca"]
+[ext_resource type="PackedScene" uid="uid://d4bkycoait5k4" path="res://scenes/SpeedPad/speedPad.tscn" id="7_x56yb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_884sy"]
+size = Vector2(13, 519.531)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0eakp"]
+size = Vector2(944, 12.25)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_s2a1k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 944.0
+offset_bottom = 544.0
+color = Color(0.0627451, 0.811765, 1, 1)
+
+[node name="platform" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(-22, 483)
+
+[node name="platform2" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(68, 483)
+
+[node name="platform3" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(158, 483)
+
+[node name="platform4" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(244, 483)
+
+[node name="player" parent="." instance=ExtResource("3_qckut")]
+position = Vector2(22, 434)
+
+[node name="hook" parent="." instance=ExtResource("4_upqx7")]
+visible = false
+position = Vector2(29, 458)
+rotation = -1.5699
+node_a = NodePath("../player")
+length = 150.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(474, 269)
+scale = Vector2(0.75, 0.871)
+zoom = Vector2(1.25, 1.25)
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(22, 434)
+
+[node name="SideWall" type="StaticBody2D" parent="."]
+position = Vector2(7, 206.531)
+collision_layer = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SideWall"]
+position = Vector2(0.5, 63.2344)
+shape = SubResource("RectangleShape2D_884sy")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="SideWall"]
+position = Vector2(930, 63.4688)
+shape = SubResource("RectangleShape2D_884sy")
+
+[node name="BottomWall" type="Area2D" parent="."]
+position = Vector2(584, 208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2(-112, 328)
+shape = SubResource("RectangleShape2D_0eakp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2(-110, -203)
+shape = SubResource("RectangleShape2D_0eakp")
+
+[node name="wall" parent="." instance=ExtResource("5_765vh")]
+visible = false
+position = Vector2(318, 248)
+
+[node name="hookpoint" parent="." instance=ExtResource("6_or4ca")]
+visible = false
+position = Vector2(530, 373)
+
+[node name="platform5" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(334, 483)
+
+[node name="platform6" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(424, 483)
+
+[node name="platform7" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(514, 483)
+
+[node name="platform8" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(604, 483)
+
+[node name="platform9" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(694, 483)
+
+[node name="platform10" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(784, 483)
+
+[node name="SpeedPad" parent="." instance=ExtResource("7_x56yb")]
+position = Vector2(179, 443)
+scale = Vector2(2, 2)
+
+[node name="platform11" parent="." instance=ExtResource("2_74yji")]
+position = Vector2(874, 483)
+
+[connection signal="fell" from="player" to="." method="new_game"]
+[connection signal="body_entered" from="BottomWall" to="player" method="_on_bottom_wall_body_entered"]
+[connection signal="body_entered" from="SpeedPad" to="player" method="_on_speed_pad_body_entered"]

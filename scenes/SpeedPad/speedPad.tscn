@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4bkycoait5k4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jprq8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vmjoj"]
+
+[node name="SpeedPad" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_jprq8")
+
+[node name="SpeedTimer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_vmjoj")
